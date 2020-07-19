@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class news {
+public class newsController {
 
     @GetMapping("/news/home-page")
     public String get() {

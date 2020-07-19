@@ -6,7 +6,9 @@ import cloud.itsu.worldly.repo.UserRepo;
 import cloud.itsu.worldly.exception.UserNotFoundException;
 import cloud.itsu.worldly.transform.UserTransform;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserService {
 
     @Autowired

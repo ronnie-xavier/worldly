@@ -11,7 +11,7 @@ import java.net.URL;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-class newsTest extends baseTest {
+class NewsControllerTest extends AbstractBaseTest {
 
     @BeforeEach
     void setUp() {
