@@ -1,0 +1,11 @@
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/worldly
+    username: myusername
+    password: mypassword
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-master.xml
