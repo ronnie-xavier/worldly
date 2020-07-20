@@ -5,6 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -18,6 +19,7 @@ import static org.hamcrest.Matchers.equalTo;
 class UserControllerTest extends AbstractBaseTest {
 
     private static final Long ID = 1L;
+    private static final Long INVALID_ID = 2L;
 
     @BeforeEach
     void setUp() {
@@ -36,8 +38,25 @@ class UserControllerTest extends AbstractBaseTest {
                 User.class
         );
 
-        User user = response.getBody();
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
 
+        User user = response.getBody();
         assertThat(user.getId(), equalTo(ID));
     }
+
+    @Test
+    void get_whenUserNotFound() throws Exception{
+        ResponseEntity<String> response = testRestTemplate.exchange(
+                new URL(getBaseUrl() + "/user/" + INVALID_ID).toString(),
+                HttpMethod.GET,
+                null,
+                String.class
+        );
+
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.NOT_FOUND));
+
+        String message = response.getBody();
+        assertThat(message, equalTo("User with ID: " + INVALID_ID + " not found"));
+    }
+
 }
